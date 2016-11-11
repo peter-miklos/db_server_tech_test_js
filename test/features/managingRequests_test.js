@@ -5,28 +5,26 @@ var Browser = require('zombie');
 var http = require('http');
 
 describe("main path", function() {
-  beforeEach(function(){
+  before(function(){
     server = http.createServer(app).listen(4000);
     browser = new Browser({ site: 'http://localhost:4000'});
   });
 
+  beforeEach(function(done) {
+    browser.visit("/", done);
+  })
+
   it("shows Hello World", function() {
-    browser.visit("/").then(function() {
-      browser.assert.text("h1", /Hello World/)
-    })
+    browser.assert.text("h1", /Hello World/);
   })
 })
 
 describe("set and get values", function() {
-  beforeEach(function(){
-    server = http.createServer(app).listen(4000);
-    browser = new Browser({ site: 'http://localhost:4000'});
-    browser.visit("/set?somekey=somevalue")
-  });
-
-  it("set the value and store it in memory by using '/set' path", function() {
-    browser.assert.text("body", /somekey=somevalue/);
+  beforeEach(function(done) {
+    browser.visit("/set?somekey=somevalue", done);
   })
 
-
+  it("set the value and store it in memory by using '/set' path", function() {
+    browser.assert.text("h1", /"somekey":"somevalue"/);
+  })
 })
