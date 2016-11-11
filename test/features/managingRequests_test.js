@@ -19,12 +19,23 @@ describe("main path", function() {
   })
 })
 
-describe("set and get values", function() {
+describe("set values", function() {
   beforeEach(function(done) {
     browser.visit("/set?somekey=somevalue", done);
   })
 
   it("set the value and store it in memory by using '/set' path", function() {
     browser.assert.text("h1", /"somekey":"somevalue"/);
+  })
+})
+
+describe("get values", function() {
+  beforeEach(function(done) {
+    browser.visit("/set?somekey=somevalue");
+    browser.visit("/get?key=somekey", done);
+  })
+
+  it("get the already set value by using the proper name of the key", function() {
+    browser.assert.text("h1", /return value: somevalue/)
   })
 })

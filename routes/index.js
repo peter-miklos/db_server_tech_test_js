@@ -14,4 +14,10 @@ router.get("/set", function(req, res, next) {
   res.render("index", { content: JSON.stringify(req.query) })
 })
 
+router.get("/get", function(req, res, next) {
+  appModel ? appModel : appModel = new AppModel;
+  var value = appModel.getValue(req.query.key)
+  res.render("index", { content: "return value: " + value})
+})
+
 module.exports = router;
