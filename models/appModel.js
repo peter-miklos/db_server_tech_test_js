@@ -10,7 +10,7 @@ AppModel.prototype = {
     return this.requests
   },
   getValue: function(key) {
-    return this.requests[key]
+    return this.requests[key] ? this.requests[key] : "key not found"
   }
 }
 

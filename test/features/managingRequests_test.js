@@ -24,7 +24,7 @@ describe("set values", function() {
     browser.visit("/set?somekey=somevalue", done);
   })
 
-  it("set the value and store it in memory by using '/set' path", function() {
+  it("sets the value and store it in memory by using '/set' path", function() {
     browser.assert.text("h1", /"somekey":"somevalue"/);
   })
 })
@@ -35,7 +35,19 @@ describe("get values", function() {
     browser.visit("/get?key=somekey", done);
   })
 
-  it("get the already set value by using the proper name of the key", function() {
+  it("gets the already set value by using the proper name of the key", function() {
     browser.assert.text("h1", /return value: somevalue/)
+  })
+
+
+})
+
+describe("get a non existing value", function() {
+  beforeEach(function(done) {
+    browser.visit("/get?key=key", done);
+  })
+
+  it("gets notice if the key is not available", function() {
+    browser.assert.text("h1", /return value: key not found/)
   })
 })
