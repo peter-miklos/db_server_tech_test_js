@@ -1,7 +1,7 @@
-var express = require('express');
-var router = express.Router();
-var AppModel = require('../models/appModel.js')
-var appModel;
+let express  = require('express');
+    router   = express.Router();
+    AppModel = require('../models/appModel.js');
+let appModel;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -17,7 +17,7 @@ router.get("/set", function(req, res, next) {
 router.get("/get", function(req, res, next) {
   appModel ? appModel : appModel = new AppModel;
   var value = appModel.getValue(req.query.key)
-  res.render("index", { content: "return value: " + value})
+  res.render("index", { content: `return value: ${value}`})
 })
 
 module.exports = router;
