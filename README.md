@@ -10,5 +10,6 @@ The program runs a server that is accessible on http://localhost:4000/. When the
 ```
 $ git clone https://github.com/peter-miklos/db_server_tech_test_js
 $ cd db_server_tech_test_js
+$ npm install
 $ DEBUG=app:* npm start
 ```
